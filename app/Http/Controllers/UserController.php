@@ -45,8 +45,12 @@ class UserController extends Controller
 
         if (!$user) {
             return response()->json([
-                "status" => false
-            ], 401);
+                "status" => false,
+                "errors" => [
+                    "email" => 'Не найден пользователь'
+                ],
+                "message" => 'Не найден пользователь'
+            ]);
         }
 
         if (Hash::check($request->password, $user->password)) {
@@ -63,8 +67,12 @@ class UserController extends Controller
 
         } else {
             return response()->json([
-                "status" => false
-            ], 401);
+                "status" => false,
+                "errors" => [
+                    "password" => 'Пароль не совпадает'
+                ],
+                "message" => 'Пароль не совпадает'
+            ]);
         }
 
 
